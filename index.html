@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velha Revolta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Velha Revolta</h1>
+        <div class="player-name">
+            <label for="name">Digite seu nome:</label>
+            <input type="text" id="name" placeholder="Seu nome">
+        </div>
+        <div class="game-modes">
+            <button onclick="startOnline()">Jogar Online</button>
+            <button onclick="startLocal()">Jogar Local</button>
+            <button onclick="showOfflineOptions()">Jogar Offline</button>
+        </div>
+        <div id="difficulty-options" class="difficulty-options" style="display:none;">
+            <h2>Escolha a dificuldade:</h2>
+            <button onclick="startOffline('easy')">Fácil</button>
+            <button onclick="startOffline('medium')">Médio</button>
+            <button onclick="startOffline('hard')">Difícil</button>
+        </div>
+        <div id="game-board" class="game-board" style="display:none;">
+            <div class="row">
+                <div class="cell" onclick="playerMove(0)"></div>
+                <div class="cell" onclick="playerMove(1)"></div>
+                <div class="cell" onclick="playerMove(2)"></div>
+            </div>
+            <div class="row">
+                <div class="cell" onclick="playerMove(3)"></div>
+                <div class="cell" onclick="playerMove(4)"></div>
+                <div class="cell" onclick="playerMove(5)"></div>
+            </div>
+            <div class="row">
+                <div class="cell" onclick="playerMove(6)"></div>
+                <div class="cell" onclick="playerMove(7)"></div>
+                <div class="cell" onclick="playerMove(8)"></div>
+            </div>
+        </div>
+        <div class="scoreboard">
+            <h2>Placar</h2>
+            <p>Jogador: <span id="player-score">0</span></p>
+            <p>Bot: <span id="bot-score">0</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
