@@ -9,21 +9,35 @@
 <body>
     <div class="container">
         <h1>Velha Revolta</h1>
+
+        <!-- Input para o nome do Jogador 1 -->
         <div class="player-name">
-            <label for="name">Digite seu nome:</label>
-            <input type="text" id="name" placeholder="Seu nome">
+            <label for="name">Digite seu nome (Jogador 1):</label>
+            <input type="text" id="name" placeholder="Nome do Jogador 1">
         </div>
+
+        <!-- Input para o nome do Jogador 2 (escondido inicialmente) -->
+        <div class="player-name" id="second-player-name" style="display:none;">
+            <label for="name2">Digite o nome do segundo jogador (Jogador 2):</label>
+            <input type="text" id="name2" placeholder="Nome do Jogador 2">
+        </div>
+
+        <!-- Botões para selecionar o modo de jogo -->
         <div class="game-modes">
             <button onclick="startOnline()">Jogar Online</button>
             <button onclick="startLocal()">Jogar Local</button>
             <button onclick="showOfflineOptions()">Jogar Offline</button>
         </div>
+
+        <!-- Opções de dificuldade para o modo offline -->
         <div id="difficulty-options" class="difficulty-options" style="display:none;">
             <h2>Escolha a dificuldade:</h2>
             <button onclick="startOffline('easy')">Fácil</button>
             <button onclick="startOffline('medium')">Médio</button>
             <button onclick="startOffline('hard')">Difícil</button>
         </div>
+
+        <!-- Tabuleiro do jogo -->
         <div id="game-board" class="game-board" style="display:none;">
             <div class="row">
                 <div class="cell" onclick="playerMove(0)"></div>
@@ -41,13 +55,16 @@
                 <div class="cell" onclick="playerMove(8)"></div>
             </div>
         </div>
+
+        <!-- Placar do jogo -->
         <div class="scoreboard">
             <h2>Placar</h2>
-            <p>Jogador: <span id="player-score">0</span></p>
-            <p>Bot: <span id="bot-score">0</span></p>
+            <p id="player-score-label">Jogador 1: <span id="player-score">0</span></p>
+            <p id="bot-score-label">Jogador 2: <span id="bot-score">0</span></p>
         </div>
     </div>
 
+    <script src="/socket.io/socket.io.js"></script> <!-- Adiciona o Socket.IO -->
     <script src="script.js"></script>
 </body>
 </html>

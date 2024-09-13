@@ -6,25 +6,30 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Rota simples para verificar se o servidor está ativo
-app.get('/', (req, res) => {
-    res.send('Servidor de Velha Revolta está ativo.');
-});
+let players = {};
+let currentPlayer = "X";
 
-// Gerenciar conexões de jogadores
 io.on('connection', (socket) => {
-    console.log('Novo jogador conectado:', socket.id);
+    console.log('Novo jogador conectado');
 
-    socket.on('move', (data) => {
-        socket.broadcast.emit('opponentMove', data); // Envia o movimento para o oponente
+    socket.on('joinGame', (playerName) => {
+        players[socket.id] = { name: playerName, symbol: currentPlayer };
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        socket.emit('startGame', players[socket.id].symbol);
+    });
+
+    socket.on('playerMove', (index) => {
+        socket.broadcast.emit('opponentMove', index);
     });
 
     socket.on('disconnect', () => {
-        console.log('Jogador desconectado:', socket.id);
+        console.log('Jogador desconectado');
+        delete players[socket.id];
     });
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+app.use(express.static('public'));
+
+server.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
 });
